@@ -1,4 +1,4 @@
-package com.ezatpanah.notekeeper
+package com.ezatpanah.notekeeper.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.ezatpanah.notekeeper.R
+import com.ezatpanah.notekeeper.ui.NoteActivity
+import com.ezatpanah.notekeeper.utils.DataManager
+import com.ezatpanah.notekeeper.utils.NOTE_POSITION
 
 class NoteRecyclerAdapter(val context: Context) : RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>()
 {
@@ -26,12 +30,14 @@ class NoteRecyclerAdapter(val context: Context) : RecyclerView.Adapter<NoteRecyc
         holder.textCourse.text = note.course?.title
         holder.textTitle.text = note.title
         holder.currentPosition = position
+        holder.color.setBackgroundColor(note.color)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textCourse: TextView = itemView.findViewById<TextView>(R.id.textCourse)
         val textTitle: TextView = itemView.findViewById<TextView>(R.id.textTitle)
-        var currentPosition = 0;
+        var currentPosition = 0
+        var color :View =itemView.findViewById(R.id.noteColor)
 
         init {
             itemView.setOnClickListener {

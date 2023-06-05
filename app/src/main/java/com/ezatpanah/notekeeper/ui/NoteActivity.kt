@@ -1,10 +1,18 @@
-package com.ezatpanah.notekeeper
+package com.ezatpanah.notekeeper.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import com.ezatpanah.notekeeper.adapter.CourseInfo
+import com.ezatpanah.notekeeper.utils.DataManager
+import com.ezatpanah.notekeeper.adapter.NoteInfo
+import com.ezatpanah.notekeeper.R
+import com.ezatpanah.notekeeper.colorselector.ColorSelector
+import com.ezatpanah.notekeeper.utils.NOTE_POSITION
+import com.ezatpanah.notekeeper.utils.POSITION_NOT_SET
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -13,6 +21,7 @@ class NoteActivity : AppCompatActivity() {
     private var notePosition = POSITION_NOT_SET
     private var isNewNote = false
     private var isCancelling = false
+    private var noteColor :Int = Color.TRANSPARENT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +45,11 @@ class NoteActivity : AppCompatActivity() {
             DataManager.notes.add(NoteInfo())
             notePosition = DataManager.notes.lastIndex
         }
+
+        colorSelector.addListener { color->
+            noteColor=color
+        }
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -47,6 +61,8 @@ class NoteActivity : AppCompatActivity() {
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
+        colorSelector.selectedColorValue= note.color
+        noteColor=note.color
 
         val coursePosition = DataManager.courses.values.indexOf(note.course)
         spinnerCourses.setSelection(coursePosition)
@@ -68,32 +84,10 @@ class NoteActivity : AppCompatActivity() {
                 finish()
                 true
             }
-            R.id.action_next -> {
-                moveNext()
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun moveNext() {
-        saveNote()
-        ++notePosition
-        displayNote()
-        invalidateOptionsMenu()
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if(notePosition >= DataManager.notes.lastIndex) {
-            val menuItem = menu?.findItem(R.id.action_next)
-            if(menuItem != null) {
-                menuItem.icon = getDrawable(R.drawable.ic_block_white_24dp)
-                menuItem.isEnabled = false
-            }
-        }
-
-        return super.onPrepareOptionsMenu(menu)
-    }
 
     override fun onPause() {
         super.onPause()
@@ -111,6 +105,7 @@ class NoteActivity : AppCompatActivity() {
         note.title = textNoteTitle.text.toString()
         note.text = textNoteText.text.toString()
         note.course = spinnerCourses.selectedItem as CourseInfo
+        note.color=this.noteColor
     }
 }
 

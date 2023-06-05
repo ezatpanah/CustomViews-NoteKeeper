@@ -1,6 +1,10 @@
-package com.ezatpanah.notekeeper
+package com.ezatpanah.notekeeper.utils
+
+import com.ezatpanah.notekeeper.adapter.CourseInfo
+import com.ezatpanah.notekeeper.adapter.NoteInfo
 
 object DataManager {
+
     val courses = HashMap<String, CourseInfo>()
     val notes = ArrayList<NoteInfo>()
 

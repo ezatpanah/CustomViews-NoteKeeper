@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/colorSelectArrowBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
+
+    <View
+        android:id="@+id/selectedColor"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="14dp"/>
+
+    <ImageView
+        android:id="@+id/colorSelectArrowForward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:src="@drawable/baseline_arrow_forward_ios_24"/>
+
+    <CheckBox
+        android:id="@+id/colorEnabled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enabled"
+        android:layout_gravity="center_vertical"/>
+
+</merge>

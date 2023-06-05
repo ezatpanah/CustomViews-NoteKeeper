@@ -1,4 +1,4 @@
-package com.ezatpanah.notekeeper
+package com.ezatpanah.notekeeper.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,11 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.ezatpanah.notekeeper.adapter.NoteRecyclerAdapter
+import com.ezatpanah.notekeeper.R
 import kotlinx.android.synthetic.main.activity_items.*
 import kotlinx.android.synthetic.main.app_bar_items.*
 import kotlinx.android.synthetic.main.content_items.*
@@ -36,7 +37,10 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -64,24 +68,6 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.items, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                showSnackbar("Display settings")
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
@@ -89,14 +75,7 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             R.id.nav_notes -> {
                 displayNotes()
             }
-            R.id.nav_share -> {
-                showSnackbar("Don't you think you've shared enough")
-            }
-            R.id.nav_send -> {
-                showSnackbar("Send")
-            }
         }
-
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }

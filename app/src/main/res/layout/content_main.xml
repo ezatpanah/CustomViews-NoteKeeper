@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".NoteActivity"
+    tools:context=".ui.NoteActivity"
     tools:showIn="@layout/activity_main">
 
     <EditText
@@ -43,4 +43,24 @@
         app:layout_constraintEnd_toEndOf="@+id/spinnerCourses"
         app:layout_constraintStart_toStartOf="@+id/spinnerCourses"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCourses" />
+
+
+    <TextView
+        android:id="@+id/colorSelectorLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Note Color"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textNoteText"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.ezatpanah.notekeeper.colorselector.ColorSelector
+        android:id="@+id/colorSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorSelectorLabel"
+        app:colors="@array/note_color_array"
+        />
+
 </android.support.constraint.ConstraintLayout>
