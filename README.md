@@ -1,5 +1,4 @@
 # CustomViews-NoteKeeper
-Screen-Shot :
 <br>
 Custom Views for selecting color for each note :
 <br>
